@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GalaxyForge - منصات صناعة التطبيقات</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(circle at 20% 30%, #0a0f2a, #03050b);
+            font-family: 'Segoe UI', 'Tahoma', system-ui, sans-serif;
+            color: #eef5ff;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        /* رأس خيال علمي */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .glow {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #aaffff, #4a80f0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px #00a6ff40;
+            letter-spacing: 2px;
+        }
+
+        .sub {
+            color: #9bb8ff;
+            border-bottom: 1px dashed #4a80f0;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        /* مربع البحث والفلتر */
+        .control-panel {
+            background: rgba(15, 25, 55, 0.65);
+            backdrop-filter: blur(12px);
+            border-radius: 40px;
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            border: 1px solid #2e4a9a;
+        }
+
+        .search-box {
+            flex: 2;
+            min-width: 200px;
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: none;
+            background: #01031a;
+            color: #c2e0ff;
+            font-size: 1rem;
+            outline: none;
+            border: 1px solid #2f5bc0;
+        }
+
+        .filter-btn {
+            background: #0f1f3f;
+            border: 1px solid #2f6bc0;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: bold;
+        }
+
+        .filter-btn.active {
+            background: #2b53b0;
+            box-shadow: 0 0 12px #3e7eff;
+            border-color: #9acdff;
+        }
+
+        /* شبكة البطاقات */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+            gap: 1.8rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: rgba(8, 14, 32, 0.75);
+            backdrop-filter: blur(8px);
+            border-radius: 32px;
+            padding: 1.5rem;
+            border: 1px solid rgba(70, 130, 230, 0.5);
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(0, 80, 255, 0.2);
+            border-color: #5e9eff;
+        }
+
+        .card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 0.5rem;
+            color: #c6e2ff;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #1e3a6f;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin: 8px 0;
+        }
+
+        .badge.free {
+            background: #1f6d3b;
+            box-shadow: 0 0 4px #3bef6e;
+        }
+
+        .desc {
+            margin: 12px 0;
+            line-height: 1.5;
+            color: #cbdcff;
+        }
+
+        .role {
+            background: #0a0e1e;
+            padding: 8px 10px;
+            border-radius: 18px;
+            font-size: 0.85rem;
+            border-right: 3px solid #3e7eff;
+            margin: 12px 0;
+        }
+
+        .btn-link {
+            display: inline-block;
+            margin-top: 12px;
+            background: #1f3d7a;
+            padding: 8px 16px;
+            border-radius: 40px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .btn-link:hover {
+            background: #3562c4;
+            letter-spacing: 1px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="glow">🌌 GalaxyForge AI</div>
+    <div class="sub">مستكشف المنصات الذكية | مجانية 🔥 | خيال علمي حقيقي</div>
+</div>
+
+<div class="control-panel">
+    <input type="text" id="searchInput" class="search-box" placeholder="🔍 ابحث عن منصة... (مثال: Flutter, Glide)">
+    <button data-filter="all" class="filter-btn active">🌟 الكل</button>
+    <button data-filter="بدون كود" class="filter-btn">🎛️ بدون كود</button>
+    <button data-filter="تعليمية" class="filter-btn">📘 تعليمية</button>
+    <button data-filter="احترافية" class="filter-btn">⚡ احترافية</button>
+</div>
+
+<div id="cardsContainer" class="cards-grid">
+    <!-- سيتم تعبئة البطاقات عبر JS -->
+</div>
+
+<footer>
+    ⚡ نظام تصنيف ذكي | المنصات المجانية الأهم | كل بطاقة تحتوي على رابط مباشر ودور واضح
+</footer>
+
+<script>
+    // ---------- قاعدة بيانات المنصات ----------
+    const platforms = [
+        {
+            name: "FlutterFlow",
+            category: ["بدون كود", "احترافية"],
+            freePlan: "مجاني: 3 مشاريع + نشر ويب",
+            description: "بناء تطبيقات موبايل وويب احترافية بالسحب والإفلات، دعم Firebase ومكونات متقدمة.",
+            role: "أنشئ تطبيقات تشبه التطبيقات الأصلية خلال أيام.",
+            url: "https://flutterflow.io"
+        },
+        {
+            name: "Bubble.io",
+            category: ["بدون كود", "احترافية"],
+            freePlan: "مجاني مع شعار Bubble وحدود زيارة",
+            description: "منصة قوية لبناء تطبيقات ويب معقدة مثل تويتر وأوبر بدون برمجة.",
+            role: "مناسبة للمشاريع الريادية ونماذج الأعمال.",
+            url: "https://bubble.io"
+        },
+        {
+            name: "Glide",
+            category: ["بدون كود"],
+            freePlan: "مجاني: مشروع واحد غير محدود المستخدمين",
+            description: "حوّل جداول Google إلى تطبيقات جوال أنيقة خلال 5 دقائق.",
+            role: "مثالي للأدوات الداخلية، قوائم، لوحات متابعة.",
+            url: "https://glideapps.com"
+        },
+        {
+            name: "Thunkable",
+            category: ["بدون كود"],
+            freePlan: "مجاني: مشاريع غير محدودة + حدود للمشاهدات",
+            description: "بناء تطبيقات أندرويد وiOS بسهولة مع دمج مستشعرات الجوال.",
+            role: "مناسب للتطبيقات التفاعلية والألعاب البسيطة.",
+            url: "https://thunkable.com"
+        },
+        {
+            name: "MIT App Inventor",
+            category: ["بدون كود", "تعليمية"],
+            freePlan: "مجاني بالكامل 💯",
+            description: "تعلم البرمجة بطريقة البناء المرئي من معهد ماساتشوستس.",
+            role: "تعليم البرمجة للأطفال والمبتدئين وإنشاء تطبيقات حقيقية.",
+            url: "https://appinventor.mit.edu"
+        },
+        {
+            name: "Adalo",
+            category: ["بدون كود"],
+            freePlan: "مجاني: تطبيق واحد + عدد محدود من السجلات",
+            description: "واجهة بصرية شبيهة بالكانفا لبناء تطبيقات قاعدة بيانات.",
+            role: "سريع لعمل تطبيقات إدارة وتنظيم شخصية.",
+            url: "https://adalo.com"
+        },
+        {
+            name: "Backendless",
+            category: ["بدون كود", "احترافية"],
+            freePlan: "مجاني: 25 ألف طلب API شهريًا",
+            description: "منصة متكاملة (خادم + واجهات) مع محرر بصري.",
+            role: "لمن يريد تطبيقات تحتاج قاعدة بيانات سحابية قوية.",
+            url: "https://backendless.com"
+        }
+    ];
+
+    function renderCards(filterCategory = "all", searchText = "") {
+        const container = document.getElementById("cardsContainer");
+        container.innerHTML = "";
+
+        let filtered = platforms.filter(platform => {
+            // فلتر حسب الفئة
+            if (filterCategory !== "all") {
+                if (!platform.category.includes(filterCategory)) return false;
+            }
+            // بحث نصي
+            if (searchText.trim() !== "") {
+                const matchName = platform.name.toLowerCase().includes(searchText.toLowerCase());
+                const matchDesc = platform.description.toLowerCase().includes(searchText.toLowerCase());
+                if (!matchName && !matchDesc) return false;
+            }
+            return true;
+        });
+
+        if (filtered.length === 0) {
+            container.innerHTML = `<div style="text-align:center; grid-column:1/-1;">🚀 لا توجد منصات تطابق بحثك .. حاول كلمات أخرى</div>`;
+            return;
+        }
+
+        filtered.forEach(p => {
+            const card = document.createElement("div");
+            card.className = "card";
+
+            // شارة مجانية مميزة
+            const freeBadge = p.freePlan.includes("مجاني بالكامل") ? `<span class="badge free">💎 مجاني كامل</span>` : `<span class="badge free">🎁 ${p.freePlan}</span>`;
+
+            // عرض الفئات كعلامات صغيرة
+            const categoryBadges = p.category.map(cat => `<span class="badge">🏷️ ${cat}</span>`).join(" ");
+
+            card.innerHTML = `
+                <h3>🛸 ${p.name}</h3>
+                <div>${categoryBadges} ${freeBadge}</div>
+                <div class="desc">📄 ${p.description}</div>
+                <div class="role">🎯 دوره الأساسي: ${p.role}</div>
+                <a href="${p.url}" target="_blank" class="btn-link">🔗 الولوج إلى المنصة →</a>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    // التحكم بالأزرار والتحديث
+    let currentFilter = "all";
+    let currentSearch = "";
+
+    function updateUI() {
+        renderCards(currentFilter, currentSearch);
+    }
+
+    // أحداث الفلاتر
+    const btns = document.querySelectorAll(".filter-btn");
+    btns.forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            btns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            currentFilter = btn.getAttribute("data-filter");
+            updateUI();
+        });
+    });
+
+    // البحث المباشر
+    const searchInput = document.getElementById("searchInput");
+    searchInput.addEventListener("input", (e) => {
+        currentSearch = e.target.value;
+        updateUI();
+    });
+
+    // التحميل الأولي
+    renderCards("all", "");
+</script>
+
+</body>
+</html>
